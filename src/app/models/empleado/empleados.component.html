@@ -1,16 +1,12 @@
-<h3 class="mb-4">Gestión de Empleados</h3>
-
-<div *ngIf="isLoading" class="alert alert-info" role="alert">
-    Cargando lista de empleados...
-</div>
+<h3 class="mb-4">GESTIÓN DE EMPLEADOS</h3>
+<p class="text-muted">Lista de Empleados</p>
 
 <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
     {{ errorMessage }}
 </div>
 
-<div *ngIf="!isLoading && !errorMessage">
-    <table class="table table-striped table-hover">
-        <thead>
+<div *ngIf="!errorMessage">
+    <table class="table table-striped table-hover table-bordered"> <thead>
             <tr>
                 <th>ID</th>
                 <th>Cédula</th>

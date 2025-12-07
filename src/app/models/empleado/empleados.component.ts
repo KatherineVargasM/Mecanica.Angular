@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { EmpleadoService } from '../../services/empleado';
+import { ActivatedRoute } from '@angular/router';
 import { Empleado } from './empleado';
 
 @Component({
@@ -12,27 +12,19 @@ import { Empleado } from './empleado';
 })
 export class EmpleadosComponent implements OnInit {
     empleados: Empleado[] = [];
-    isLoading: boolean = true;
+    isLoading: boolean = false;
     errorMessage: string | null = null;
 
-    constructor(private empleadoService: EmpleadoService) { }
+    constructor(private route: ActivatedRoute) { } 
 
     ngOnInit(): void {
-        this.loadEmpleados();
-    }
 
-    loadEmpleados(): void {
-        this.isLoading = true;
-        this.empleadoService.getEmpleados().subscribe({
-            next: (data) => {
-                this.empleados = data;
-                this.isLoading = false;
-            },
-            error: (err) => {
-                console.error('Error al cargar empleados:', err);
-                this.errorMessage = 'Hubo un error al conectar con el servidor. Revise la consola para detalles.';
-                this.isLoading = false;
-            }
-        });
+        const resolvedData = this.route.snapshot.data['empleadosData'];
+        
+        if (resolvedData && resolvedData.length > 0) {
+            this.empleados = resolvedData;
+        } else {
+            this.errorMessage = 'Hubo un error al recuperar los datos de empleados o la lista está vacía.';
+        }
     }
 }
