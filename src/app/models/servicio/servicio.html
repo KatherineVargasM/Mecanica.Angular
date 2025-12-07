@@ -1,1 +1,34 @@
-<p>servicio works!</p>
+<h3 class="mb-4">Gestión de Servicios</h3>
+
+<div *ngIf="isLoading" class="alert alert-info" role="alert">
+    Cargando lista de servicios...
+</div>
+
+<div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+    {{ errorMessage }}
+</div>
+
+<div *ngIf="!isLoading && !errorMessage">
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Vehículo (Marca/Modelo)</th>
+                <th>Cliente (Usuario)</th>
+                <th>Fecha de Servicio</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let servicio of servicios">
+                <td>{{ servicio.id }}</td>
+                <td>{{ servicio.vehiculo?.marca }} / {{ servicio.vehiculo?.modelo }}</td> 
+                <td>{{ servicio.usuario?.nombre_usuario }}</td> 
+                <td>{{ servicio.fecha_servicio | date:'dd/MM/yyyy h:mm a' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div *ngIf="servicios.length === 0" class="alert alert-warning">
+        No se encontraron servicios registrados.
+    </div>
+</div>

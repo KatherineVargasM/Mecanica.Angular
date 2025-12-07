@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
-import { RouterOutlet, RouterLink } from '@angular/router'; // <--- Importación correcta
+import { RouterOutlet, RouterLink } from '@angular/router';
 
 @Component({
     selector: 'app-root',
     standalone: true,
-    imports: [RouterOutlet, RouterLink], // <--- Referencia correcta en imports
+    imports: [RouterOutlet, RouterLink],
     templateUrl: './app.html',
-    // ... resto del código
 })
 export class App {
     title = 'Mecanica.Angular';
